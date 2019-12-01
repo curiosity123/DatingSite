@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using DatingSite.API.Models;
+using DatingSite_API.Models;
 
 namespace DatingSite.API.Data
 {
@@ -12,5 +13,6 @@ namespace DatingSite.API.Data
 
 
          public DbSet<Value> Values  { get; set; }
+         public DbSet<User> Users { get; set; }
     }
 }
