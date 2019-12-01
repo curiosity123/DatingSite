@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PortalRandkowy.API.Data;
-using PortalRandkowy.API.Models;
+using DatingSite.API.Data;
+using DatingSite.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace PortalRandkowy.API.Controllers
+namespace DatingSite.API.Controllers
 {
     
     [Route("api/[controller]")]

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PortalRandkowy.API.Migrations
+namespace DatingSite.API.Migrations
 {
     public partial class InitialCreate : Migration
     {
