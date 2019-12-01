@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PortalRandkowy.API.Data;
 using PortalRandkowy.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace PortalRandkowy.API.Controllers
 {
@@ -23,46 +24,46 @@ namespace PortalRandkowy.API.Controllers
 
 
         [HttpGet]
-        public ActionResult Get()
+        public async Task<IActionResult> GetValues()
         {
-            var values = _context.Values.ToList();
+            var values = await _context.Values.ToListAsync();
             return Ok(values);
         }
 
         [HttpGet("{id}")]
-        public ActionResult GetValue(int id)
+        public async Task<IActionResult> GetValue(int id)
         {
-            var values = _context.Values.FirstOrDefault(x => x.Id == id);
+            var values = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
             return Ok(values);
         }
 
 
 
         [HttpPost]
-        public IActionResult AddValue([FromBody] Value value)
+        public async Task<IActionResult> AddValue([FromBody] Value value)
         {
-            _context.Add(value);
-            _context.SaveChanges();
+            await _context.AddAsync(value);
+            await _context.SaveChangesAsync();
             return Ok(value);
         }
 
 
         [HttpPut("{id}")]
-        public IActionResult EditValue(int id, [FromBody] Value value)
+        public async Task<IActionResult> EditValue(int id, [FromBody] Value value)
         {
-            var data = _context.Values.Find(id);
+            var data = await _context.Values.FindAsync(id);
             data.Name = value.Name;
             _context.Values.Update(data);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok(value);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteValue(int id)
+        public async Task<IActionResult> DeleteValue(int id)
         {
-            var data = _context.Values.Find(id);
+            var data = await _context.Values.FindAsync(id);
             _context.Values.Remove(data);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok();
         }
 
