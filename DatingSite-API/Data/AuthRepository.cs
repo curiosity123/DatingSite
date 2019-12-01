@@ -14,7 +14,9 @@ namespace DatingSite_API.Data
         {
             _context = context;
         }
+
         #region Public method
+
         public async Task<User> Login(string username, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == username);
@@ -48,12 +50,10 @@ namespace DatingSite_API.Data
             else return false;
         }
 
-        #endregion
+#endregion
+
 
         #region Private methods
-
-
-
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
@@ -79,6 +79,8 @@ namespace DatingSite_API.Data
                 passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
         }
+
+        #endregion
     }
-    #endregion
+
 }
