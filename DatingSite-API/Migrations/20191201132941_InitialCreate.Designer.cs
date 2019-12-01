@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using DatingSite.API.Data;
+using DatingSite_API.Data;
 
-namespace DatingSite.API.Migrations
+namespace DatingSite_API.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20191201132941_InitialCreate")]

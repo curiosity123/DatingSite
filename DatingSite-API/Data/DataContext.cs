@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using DatingSite_API.Models;
 
 
-namespace DatingSite.API.Data
+namespace DatingSite_API.Data
 {
     public class DataContext:DbContext
     {

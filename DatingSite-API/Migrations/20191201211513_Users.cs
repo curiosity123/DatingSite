@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DatingSite.API.Migrations
+namespace DatingSite_API.Migrations
 {
     public partial class Users : Migration
     {

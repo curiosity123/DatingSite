@@ -10,10 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using DatingSite.API.Data;
+using DatingSite_API.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace DatingSite.API
+namespace DatingSite_API
 {
     public class Startup
     {
