@@ -28,7 +28,8 @@ namespace PortalRandkowy.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x=>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllers();
+            services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            //services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,16 +41,18 @@ namespace PortalRandkowy.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            app.UseMvc();
 
-            app.UseRouting();
+           // app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+          //  app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+         //   app.UseAuthorization();
+
+          //  app.UseEndpoints(endpoints =>
+          //  {
+          //      endpoints.MapControllers();
+          //  });
         }
     }
 }
