@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DatingSite.API.Data;
-using DatingSite.API.Models;
+using DatingSite_API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingSite.API.Controllers
