@@ -7,10 +7,11 @@ using Microsoft.Extensions.Logging;
 using DatingSite_API.Data;
 using DatingSite_API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatingSite_API.Controllers
 {
-    
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -29,7 +30,7 @@ namespace DatingSite_API.Controllers
             var values = await _context.Values.ToListAsync();
             return Ok(values);
         }
-
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
