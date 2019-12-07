@@ -15,11 +15,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Newtonsoft.Json;
+
 
 namespace DatingSite_API
 {
     public class Startup
-    {
+    { 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,9 +31,14 @@ namespace DatingSite_API
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {           
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings{
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            
             services.AddCors();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository,AuthRepository>();
@@ -46,7 +53,7 @@ namespace DatingSite_API
                ValidateAudience = false
                 };
             });
-            //services.AddControllers();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +64,7 @@ namespace DatingSite_API
 
                 app.UseDeveloperExceptionPage();
             }
+ 
             seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthentication();
