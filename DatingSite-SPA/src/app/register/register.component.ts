@@ -14,14 +14,14 @@ export class RegisterComponent implements OnInit {
 
   model: any = {};
 
-  constructor(private authService: AuthService, private alertify:AlertifyService) {}
+  constructor(private authService: AuthService, private alertify: AlertifyService) {}
 
   ngOnInit() {}
 
   register() {
     this.authService.register(this.model).subscribe(() => {
-     this.alertify.success('success');}, 
-      error => {this.alertify.error('register error');});
+     this.alertify.success('success'); },
+      error => {this.alertify.error(error); });
   }
 
   cancel() {

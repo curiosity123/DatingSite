@@ -29,7 +29,6 @@ namespace DatingSite_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            throw new System.Exception("generuje blad");
             var users = await _repo.GetUsers();
             var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
             return Ok(usersToReturn);

@@ -21,6 +21,7 @@ import { LikesComponent } from './likes/likes.component';
 import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
 
 
@@ -53,7 +54,7 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     BsDropdownModule.forRoot()
   ],
-  providers: [AuthService, AlertifyService, UserService, AuthGuard],
+  providers: [AuthService, AlertifyService, UserService, AuthGuard, ErrorInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
