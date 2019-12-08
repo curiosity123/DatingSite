@@ -75,7 +75,7 @@ namespace DatingSite_API.Dtos
 
         //photos    
 
-        public ICollection<Photo> Photos { get; set; }
+        public ICollection<PhotosForDetailedDto> Photos { get; set; }
         public string PhotoUrl { get; set; }
 
     }
