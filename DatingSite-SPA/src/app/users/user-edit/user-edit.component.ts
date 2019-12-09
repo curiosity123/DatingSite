@@ -11,6 +11,9 @@ import { User } from 'src/app/models/User';
 export class UserEditComponent implements OnInit {
 
   user: User;
+
+
+  
   constructor( private route: ActivatedRoute) { }
 
   ngOnInit() {
