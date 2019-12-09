@@ -21,7 +21,7 @@ export class UserDatailComponent implements OnInit {
   }
 
   loadUser() {
-    this.userService.getUser(+this.route.snapshot.params['id'])
+    this.userService.getUser(+this.route.snapshot.params.id)
       .subscribe(
         (user: User) => {
           this.user = user;
