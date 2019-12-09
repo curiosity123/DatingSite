@@ -43,15 +43,15 @@
 
     <div class="col-sm-8">
       <div class="tab-panel">
-        <tabset>
-          <tab heading="General" id="tab1">
-            <table style="width: 100%;">
+        <tabset class="user-tabset">
+          <tab heading="General">
+            <table class="user-table">
               <tr>
-                <td style="width: 50%;">
+                <td class="user-table-td">
                   <h5>Height:</h5>
                   <p>{{ user?.growth }}</p>
                 </td>
-                <td style="width: 50%;">
+                <td class="user-table-td">
                   <h5>Martial status:</h5>
                   <p>{{ user?.martialStatus }}</p>
                 </td>
@@ -95,54 +95,64 @@
             </table>
           </tab>
           <tab heading="About me">
-            <h5>Motto:</h5>
-            <p>{{ user?.motto }}</p>
+            <div class="tab-content">
+              <h5>Motto:</h5>
+              <p>{{ user?.motto }}</p>
 
-            <h5>Description:</h5>
-            <p>{{ user?.description }}</p>
+              <h5>Description:</h5>
+              <p>{{ user?.description }}</p>
 
-            <h5>Personality:</h5>
-            <p>{{ user?.personality }}</p>
+              <h5>Personality:</h5>
+              <p>{{ user?.personality }}</p>
 
-            <h5>Looking for:</h5>
-            <p>{{ user?.lookingFor }}</p>
+              <h5>Looking for:</h5>
+              <p>{{ user?.lookingFor }}</p>
+            </div>
           </tab>
           <tab heading="Hobby">
-            <h5>Free time:</h5>
-            <p>{{ user?.freeTime }}</p>
+            <div class="tab-content">
+              <h5>Free time:</h5>
+              <p>{{ user?.freeTime }}</p>
 
-            <h5>Sport:</h5>
-            <p>{{ user?.sport }}</p>
+              <h5>Sport:</h5>
+              <p>{{ user?.sport }}</p>
 
-            <h5>Films:</h5>
-            <p>{{ user?.movies }}</p>
+              <h5>Films:</h5>
+              <p>{{ user?.movies }}</p>
 
-            <h5>Music:</h5>
-            <p>{{ user?.music }}</p>
+              <h5>Music:</h5>
+              <p>{{ user?.music }}</p>
+            </div>
           </tab>
 
           <tab heading="Preferences">
-            <h5>I like:</h5>
-            <p>{{ user?.iLike }}</p>
+            <div class="tab-content">
+              <h5>I like:</h5>
+              <p>{{ user?.iLike }}</p>
 
-            <h5>I do not like:</h5>
-            <p>{{ user?.iDoNotLike }}</p>
+              <h5>I do not like:</h5>
+              <p>{{ user?.iDoNotLike }}</p>
 
-            <h5>Makes me laugh:</h5>
-            <p>{{ user?.makesMeLaugh }}</p>
+              <h5>Makes me laugh:</h5>
+              <p>{{ user?.makesMeLaugh }}</p>
 
-            <h5>I feel best in:</h5>
-            <p>{{ user?.itFeelsBestIn }}</p>
+              <h5>I feel best in:</h5>
+              <p>{{ user?.itFeelsBestIn }}</p>
 
-            <h5>FriendsWouldDescribeMe:</h5>
-            <p>{{ user?.friendsWouldDescribeMe }}</p>
+              <h5>FriendsWouldDescribeMe:</h5>
+              <p>{{ user?.friendsWouldDescribeMe }}</p>
+            </div>
           </tab>
 
           <tab heading="Photos">
-            <p>images</p>
+            <div class="tab-content">
+              <p>images</p>
+            </div>
           </tab>
           <tab heading="Messages">
-            <p>messages</p>
+            <div class="tab-content">
+              <p>messages</p>
+            </div>
           </tab>
         </tabset>
       </div>
