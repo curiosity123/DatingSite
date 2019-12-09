@@ -24,6 +24,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { UserCardComponent } from './users/user-card/user-card.component';
 import { UserDatailComponent } from './users/user-datail/user-datail.component';
+import { UserDetailResolver } from './_resolvers/user-detail.resolver';
+import { UserListResolver } from './_resolvers/user-list.resolver';
 
 
 
@@ -57,9 +59,10 @@ export function tokenGetter() {
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot() 
   ],
-  providers: [AuthService, AlertifyService, UserService, AuthGuard, ErrorInterceptorProvider],
+  providers: [AuthService, AlertifyService, UserService, AuthGuard, ErrorInterceptorProvider, UserDetailResolver,UserListResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+ 

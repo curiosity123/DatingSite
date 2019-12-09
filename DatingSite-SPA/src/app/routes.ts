@@ -5,6 +5,8 @@ import { LikesComponent } from './likes/likes.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserDatailComponent } from './users/user-datail/user-datail.component';
+import { UserDetailResolver } from './_resolvers/user-detail.resolver';
+import { UserListResolver } from './_resolvers/user-list.resolver';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -12,8 +14,8 @@ export const appRoutes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-        {path: 'users', component: UserListComponent},
-        {path: 'users/:id', component: UserDatailComponent},
+        {path: 'users', component: UserListComponent, resolve: {users: UserListResolver}},
+        {path: 'users/:id', component: UserDatailComponent, resolve: {user: UserDetailResolver}},
         {path: 'likes', component: LikesComponent },
         {path: 'messages', component: MessagesComponent},
     ]
