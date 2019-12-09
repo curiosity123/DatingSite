@@ -38,10 +38,114 @@
             <button class="btn btn-success w-100">Message</button>
           </div>
         </div>
-        
       </div>
     </div>
 
-    <div class="col-sm-8">other</div>
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset>
+          <tab heading="General" id="tab1">
+            <table style="width: 100%;">
+              <tr>
+                <td style="width: 50%;">
+                  <h5>Height:</h5>
+                  <p>{{ user?.growth }}</p>
+                </td>
+                <td style="width: 50%;">
+                  <h5>Martial status:</h5>
+                  <p>{{ user?.martialStatus }}</p>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <h5>Eye color:</h5>
+                  <p>{{ user?.eyeColor }}</p>
+                </td>
+
+                <td>
+                  <h5>Education:</h5>
+                  <p>{{ user?.education }}</p>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <h5>Hair colour:</h5>
+                  <p>{{ user?.hairColor }}</p>
+                </td>
+
+                <td>
+                  <h5>Profession:</h5>
+                  <p>{{ user?.profession }}</p>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <h5>Children:</h5>
+                  <p>{{ user?.children }}</p>
+                </td>
+
+                <td>
+                  <h5>Languages:</h5>
+                  <p>{{ user?.languages }}</p>
+                </td>
+              </tr>
+            </table>
+          </tab>
+          <tab heading="About me">
+            <h5>Motto:</h5>
+            <p>{{ user?.motto }}</p>
+
+            <h5>Description:</h5>
+            <p>{{ user?.description }}</p>
+
+            <h5>Personality:</h5>
+            <p>{{ user?.personality }}</p>
+
+            <h5>Looking for:</h5>
+            <p>{{ user?.lookingFor }}</p>
+          </tab>
+          <tab heading="Hobby">
+            <h5>Free time:</h5>
+            <p>{{ user?.freeTime }}</p>
+
+            <h5>Sport:</h5>
+            <p>{{ user?.sport }}</p>
+
+            <h5>Films:</h5>
+            <p>{{ user?.movies }}</p>
+
+            <h5>Music:</h5>
+            <p>{{ user?.music }}</p>
+          </tab>
+
+          <tab heading="Preferences">
+            <h5>I like:</h5>
+            <p>{{ user?.iLike }}</p>
+
+            <h5>I do not like:</h5>
+            <p>{{ user?.iDoNotLike }}</p>
+
+            <h5>Makes me laugh:</h5>
+            <p>{{ user?.makesMeLaugh }}</p>
+
+            <h5>I feel best in:</h5>
+            <p>{{ user?.itFeelsBestIn }}</p>
+
+            <h5>FriendsWouldDescribeMe:</h5>
+            <p>{{ user?.friendsWouldDescribeMe }}</p>
+          </tab>
+
+          <tab heading="Photos">
+            <p>images</p>
+          </tab>
+          <tab heading="Messages">
+            <p>messages</p>
+          </tab>
+        </tabset>
+      </div>
+    </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterModule } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 import { AppComponent } from './app.component';
@@ -40,7 +40,8 @@ export function tokenGetter() {
     UserListComponent,
     LikesComponent,
     MessagesComponent,
-    UserCardComponent,UserDatailComponent
+    UserCardComponent, 
+    UserDatailComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +56,8 @@ export function tokenGetter() {
     }),
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot()
   ],
   providers: [AuthService, AlertifyService, UserService, AuthGuard, ErrorInterceptorProvider],
   bootstrap: [AppComponent]
