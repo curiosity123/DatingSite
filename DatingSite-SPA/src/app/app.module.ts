@@ -28,9 +28,11 @@ import { UserCardComponent } from './users/user-card/user-card.component';
 import { UserDatailComponent } from './users/user-datail/user-datail.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { UserEditResolver } from './_resolvers/user-edit.resolver';
 
 
-class CustomHammerConfig extends HammerGestureConfig  {
+class CustomHammerConfig2 extends HammerGestureConfig  {
   overrides = {
       pinch: { enable: false },
       rotate: { enable: false }
@@ -50,7 +52,8 @@ export function tokenGetter() {
     LikesComponent,
     MessagesComponent,
     UserCardComponent,
-    UserDatailComponent
+    UserDatailComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ export function tokenGetter() {
     ErrorInterceptorProvider, 
     UserDetailResolver, 
     UserListResolver,
-    { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig } ],
+    UserEditResolver,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig2 } ],
   bootstrap: [AppComponent]
 })
 export class AppModule  {
