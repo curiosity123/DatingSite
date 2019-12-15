@@ -3,3 +3,7 @@ img.img-thumbnail {
     min-width: 200px !important;
     margin-bottom: 5px;
 }
+
+button.btn{
+    height: 30px;;
+}

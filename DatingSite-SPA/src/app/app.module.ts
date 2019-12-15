@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule, CustomHammerConfig } from 'ngx-gallery';
+import { FileUploadModule} from 'ng2-file-upload';
 
 
 
@@ -62,6 +63,7 @@ export function tokenGetter() {
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    FileUploadModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
