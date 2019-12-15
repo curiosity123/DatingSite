@@ -15,6 +15,11 @@ namespace DatingSite_API.Data
             _context = context;
         }
 
+        public Task<Photo> GetPhoto(int Id)
+        {
+           return  _context.Photos.FirstOrDefaultAsync(p=>p.Id== Id);
+        }
+
         public async Task<User> GetUser(int Id)
         {
            var user = await _context.Users.Include(p=> p.Photos).FirstOrDefaultAsync(u=>u.Id == Id);

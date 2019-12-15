@@ -42,7 +42,7 @@ namespace DatingSite_API.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForUser(int userId, PhotoForCreationDto photo)
+        public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm]PhotoForCreationDto photo)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -78,9 +78,21 @@ namespace DatingSite_API.Controllers
             userFromRepo.Photos.Add(mappedPhoto);
 
             if (await _repo.SaveAll())
-                return Ok();
+            {
+                var returnPhoto = _mapper.Map<PhotoForReturnDto>(mappedPhoto);
+                return CreatedAtRoute("GetPhoto", new { id = returnPhoto.Id }, returnPhoto);
+            }
 
             return BadRequest("Adding photo failed!");
+        }
+
+
+        [HttpGet("id", Name = "GetPhoto")]
+        public async Task<IActionResult> GetPhoto(int id)
+        {
+            var photoFromRepo = await _repo.GetPhoto(id);
+            var photoForReturn = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
+            return Ok(photoForReturn);
         }
 
     }
