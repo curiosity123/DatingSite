@@ -29,7 +29,7 @@ this.route.data.subscribe(data => this.user = data.user);
 
 
   updateUser() {
-    
+
   this.userService.UpdateUser(this.authService.decodedToken.nameid, this.user).subscribe(next =>
      {
   this.alertify.success('Updated successfully!!!!');

@@ -16,5 +16,6 @@ namespace DatingSite_API.Models
 
         public User User { get; set; }
         public int UserId { get; set; }
+        public string CloudinaryId { get; set; }
     }
 }

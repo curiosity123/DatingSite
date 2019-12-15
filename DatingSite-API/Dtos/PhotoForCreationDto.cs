@@ -1,0 +1,26 @@
+using System;
+using Microsoft.AspNetCore.Http;
+
+namespace DatingSite_API.Dtos
+{
+    public class PhotoForCreationDto
+    {
+
+
+        public string Url { get; set; }
+
+        public string Description { get; set; }
+
+        public DateTime DateAdded { get; set; }
+
+        public IFormFile File { get; set; }
+
+        public string CloudinaryId { get; set; }
+
+
+        public PhotoForCreationDto()
+        {
+            DateAdded = DateTime.Now;
+        }
+    }
+}
