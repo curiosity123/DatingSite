@@ -15,7 +15,7 @@ export class UserEditComponent implements OnInit {
 
   user: User;
   @ViewChild('editForm', {static: false}) editForm: NgForm;
-@HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
+  @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
   if (this.editForm.dirty) {
 event.returnValue = true;
   }
@@ -29,7 +29,6 @@ this.route.data.subscribe(data => this.user = data.user);
 
 
   updateUser() {
-
   this.userService.UpdateUser(this.authService.decodedToken.nameid, this.user).subscribe(next =>
      {
   this.alertify.success('Updated successfully!!!!');

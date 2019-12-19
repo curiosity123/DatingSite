@@ -7,3 +7,11 @@ img.img-thumbnail {
 button.btn{
     height: 30px;;
 }
+
+.nv-file-over{
+    border: 2px red;
+}
+
+input[type=file]{
+    color: transparent;
+}

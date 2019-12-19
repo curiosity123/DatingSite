@@ -4,6 +4,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { CoreEnvironment } from '@angular/compiler/src/compiler_facade_interface';
 import { AuthService } from '../_services/auth.service';
+import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-photos',
@@ -11,42 +12,18 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./photos.component.css']
 })
 export class PhotosComponent implements OnInit {
-  uploader: FileUploader;
-  hasBaseDropZoneOver = true;
   baseUrl = environment.apiUrl;
+
+
+
+  fileData: File = null;
+  previewUrl: any = null;
+  fileUploadProgress: string = null;
+  uploadedFilePath: string = null;
 
   @Input() photos: Photo[];
 
-  constructor(private authService: AuthService) {
-    this.uploader = new FileUploader({
-      url: this.baseUrl +
-      'users/' +
-      this.authService.decodedToken.nameid +
-      '/photos',
-      authToken: 'Bearer ' + localStorage.getItem('token'),
-      disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
-      formatDataFunctionIsAsync: true,
-      isHTML5:true,
-      allowedFileType: ['image'],
-      formatDataFunction: async (item) => {
-        return new Promise( (resolve, reject) => {
-          resolve({
-            name: item._file.name,
-            length: item._file.size,
-            contentType: item._file.type,
-            date: new Date()
-          });
-        });
-      },
-
-      removeAfterUpload: true,
-      autoUpload: false,
-      maxFileSize: 10 * 1024 * 1024
-    });
- 
-    this.hasBaseDropZoneOver = false;
-
- 
+  constructor(private authService: AuthService, private http: HttpClient) {
 
   }
 
@@ -54,9 +31,56 @@ export class PhotosComponent implements OnInit {
 
   }
 
-  public fileOverBase(e: any): void {
-    this.hasBaseDropZoneOver = e;
+
+
+  // authToken: 'Bearer ' + localStorage.getItem('token')
+  fileProgress(fileInput: any) {
+    this.fileData =  fileInput.target.files[0] as File;
+    this.preview();
+}
+
+preview() {
+  // Show preview
+  const mimeType = this.fileData.type;
+  if (mimeType.match(/image\/*/) == null) {
+    return;
   }
 
+  const reader = new FileReader();
+  reader.readAsDataURL(this.fileData);
+  reader.onload = (_event) => {
+    this.previewUrl = reader.result;
+  };
+}
+
+
+
+
+
+  onSend() {
+    const formData = new FormData();
+    formData.append('File', this.fileData);
+
+    this.fileUploadProgress = '0%';
+
+    this.http.post(this.baseUrl +
+      'users/' +
+      this.authService.decodedToken.nameid +
+      '/photos', formData, {
+      reportProgress: true,
+      observe: 'events'
+    })
+    .subscribe(events => {
+      if (events.type === HttpEventType.UploadProgress) {
+        this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
+        console.log(this.fileUploadProgress);
+      } else if (events.type === HttpEventType.Response) {
+        this.fileUploadProgress = '';
+        console.log(events.body);
+        alert('SUCCESS !!');
+      }
+
+    });
+};
 
 }

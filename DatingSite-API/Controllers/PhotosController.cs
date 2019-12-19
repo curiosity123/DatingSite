@@ -9,6 +9,7 @@ using DatingSite_API.Dtos;
 using DatingSite_API.Helpers;
 using DatingSite_API.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -42,16 +43,18 @@ namespace DatingSite_API.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm]PhotoForCreationDto photo)
-        {
+        public async Task<IActionResult> AddPhotoForUser(int userId,[FromForm] PhotoForCreationDto photo)
+        {     
+            
+
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var userFromRepo = await _repo.GetUser(userId);
-
+       
             var file = photo.File;
             var uploadResult = new ImageUploadResult();
-            var param = new ImageUploadParams(); ;
+            var param = new ImageUploadParams(); 
 
             if (file.Length > 0)
             {
