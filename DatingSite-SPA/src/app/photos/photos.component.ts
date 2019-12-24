@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,ViewChild} from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Photo } from '../models/Photo';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
@@ -7,6 +7,8 @@ import { AuthService } from '../_services/auth.service';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { AlertifyService } from '../_services/alertify.service';
 import { JsonPipe } from '@angular/common';
+import { UserService } from '../_services/user.service';
+
 
 @Component({
   selector: 'app-photos',
@@ -15,6 +17,7 @@ import { JsonPipe } from '@angular/common';
 })
 export class PhotosComponent implements OnInit {
   baseUrl = environment.apiUrl;
+  currentMain: Photo;
 
   fileData: File = null;
   previewUrl: any = null;
@@ -22,11 +25,13 @@ export class PhotosComponent implements OnInit {
   uploadedFilePath: string = null;
 
   @Input() photos: Photo[];
+  @Output() OnMainPhotoChanged = new EventEmitter<string>();
 
   constructor(
     private authService: AuthService,
     private http: HttpClient,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {}
@@ -84,5 +89,19 @@ export class PhotosComponent implements OnInit {
           this.alertify.success('Added sucessfully!!');
         }
       });
+  }
+
+  setAsMain(photo: Photo) {
+    this.userService
+      .SetMainPhoto(this.authService.decodedToken.nameid, photo.id)
+      .subscribe(
+        x => {
+          this.currentMain = this.photos.filter(x => x.isMain === true)[0];
+          this.currentMain.isMain = false;
+          photo.isMain = true;
+          this.OnMainPhotoChanged.emit(photo.url);
+        },
+        error => this.alertify.error('Error')
+      );
   }
 }

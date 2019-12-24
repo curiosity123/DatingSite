@@ -39,4 +39,11 @@ this.route.data.subscribe(data => this.user = data.user);
 
   }
 
+
+
+  changeMainPhoto(url: string)
+  {
+    this.user.photoUrl = url;
+  }
+
 }
