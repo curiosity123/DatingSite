@@ -13,9 +13,9 @@
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container" >
     <div class="row">
-        <div class="col-md-6 offset-md-3">
+        <div >
             <h3>Choose File</h3>            
             <div class="form-group">
                 <input type="file" name="image" (change)="fileProgress($event)" />
@@ -24,7 +24,7 @@
                 Upload progress: {{ fileUploadProgress }}
             </div>
             <div class="image-preview mb-3" *ngIf="previewUrl">
-                <img [src]="previewUrl" height="300" />                 
+                <img [src]="previewUrl" class="img img-thumbnail text-center" />                 
             </div>
  
             <div class="mb-3" *ngIf="uploadedFilePath">
