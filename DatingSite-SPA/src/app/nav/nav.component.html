@@ -18,7 +18,9 @@
 
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown >
+    
       <a class="dropdown-toggle text-light" dropdownToggle >
+        <img class="img" src="{{loggedUser.photoUrl}}">
         Hi {{ authService.decodedToken?.unique_name | titlecase}}
       </a>
       <div class="dropdown-menu mt-4" *bsDropdownMenu >

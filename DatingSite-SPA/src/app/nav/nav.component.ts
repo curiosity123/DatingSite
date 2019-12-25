@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Router } from '@angular/router';
+import { User } from '../models/User';
 declare let alertify: any;
 
 
@@ -13,10 +14,14 @@ declare let alertify: any;
 export class NavComponent implements OnInit {
 
   model: any = {};
+  loggedUser: User;
 
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+   this.loggedUser = JSON.parse(localStorage.getItem('user'));
+  }
 
 
   login() {
@@ -36,6 +41,7 @@ loggedIn() {
 
 logout() {
   localStorage.removeItem('token');
+  localStorage.removeItem('user');
   this.alertify.message('you are logged out');
   this.router.navigate(['/home']);
 }
