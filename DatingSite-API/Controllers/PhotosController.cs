@@ -100,7 +100,44 @@ namespace DatingSite_API.Controllers
             return Ok(photoForReturn);
         }
 
+        [HttpDelete("{id}/deletePhoto")]
+        public async Task<IActionResult> deletePhoto(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
+            var user = await _repo.GetUser(userId);
+
+            if (await _repo.GetPhoto(id) == null)
+                return Unauthorized();
+
+            var photo = await _repo.GetPhoto(id);
+
+
+            if (photo != null)
+            {
+                if (photo.IsMain)
+                    return BadRequest("You can't delete main photo :(");
+
+
+
+
+                DeletionParams param = new DeletionParams(photo.CloudinaryId);
+                var result = await _cloudinary.DestroyAsync(param);
+
+                if (result.Result == "ok")
+                {
+                    var res = user.Photos.Remove(photo);
+
+                    if (!res || !await _repo.SaveAll())
+                        return BadRequest("Remove photo method failed");
+                }
+                else
+                    return BadRequest("Photo not exist!");
+            }
+
+            return Ok();
+        }
 
         [HttpPost("{id}/setMain")]
         public async Task<IActionResult> setMainPhoto(int userId, int id)

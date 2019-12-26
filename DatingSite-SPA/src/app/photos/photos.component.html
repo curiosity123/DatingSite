@@ -9,7 +9,7 @@
       <button type="button" class="btn btn-sm mr-2" [disabled]="photo.isMain" [ngClass]="photo.isMain? 'btn-success active' : 'btn-secondary'" (click)="setAsMain(photo)" >
         Set as main photo
       </button>
-      <button type="button" class="btn btn-sm btn-danger fa fa-trash"></button>
+      <button type="button" class="btn btn-sm btn-danger fa fa-trash" (click)="removePhoto(photo.id)"></button>
     </div>
   </div>
 </div>

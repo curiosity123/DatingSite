@@ -14,13 +14,15 @@ declare let alertify: any;
 export class NavComponent implements OnInit {
 
   model: any = {};
-  loggedUser: User;
+  userPhoto: string;
 
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) {}
 
   ngOnInit() {
 
-   this.loggedUser = JSON.parse(localStorage.getItem('user'));
+  
+   this.authService.userPhoto.subscribe(photo => this.userPhoto = photo);
+
   }
 
 

@@ -26,6 +26,7 @@ export class PhotosComponent implements OnInit {
 
   @Input() photos: Photo[];
   @Output() OnMainPhotoChanged = new EventEmitter<string>();
+  @Output() OnDeletePhoto = new EventEmitter<number>();
 
   constructor(
     private authService: AuthService,
@@ -103,5 +104,9 @@ export class PhotosComponent implements OnInit {
         },
         error => this.alertify.error('Error')
       );
+  }
+
+  removePhoto(id: number) {
+    this.alertify.confirm('Do you want to remove photo?', () => this.OnDeletePhoto.emit(id));
   }
 }

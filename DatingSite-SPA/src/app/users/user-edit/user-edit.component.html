@@ -174,7 +174,7 @@
 
             <tab heading="Photos">
               <div class="tab-content">
-                <app-photos [photos]="user.photos" (OnMainPhotoChanged)="changeMainPhoto($event)"></app-photos>
+                <app-photos [photos]="user.photos" (OnMainPhotoChanged)="changeMainPhoto($event)" (OnDeletePhoto)="deletePhoto($event)"></app-photos>
               </div>
             </tab>
             <tab heading="Messages">
