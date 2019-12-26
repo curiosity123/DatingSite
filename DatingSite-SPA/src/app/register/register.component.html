@@ -18,7 +18,6 @@
   </div>
 
   <div class="form-group">
-    <div class="form-group">
       <input
         type="text"
         placeholder="Date of birth"
@@ -30,8 +29,9 @@
             registerForm.get('dateOfBirth').errors &&
             registerForm.get('dateOfBirth').touched
         }"
+        [maxDate]="maxDate"
       />
-    </div>
+
     <div class="invalid-feedback">Date of birth is required</div>
   </div>
 

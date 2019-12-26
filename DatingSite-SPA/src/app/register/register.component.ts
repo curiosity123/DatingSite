@@ -20,12 +20,13 @@ export class RegisterComponent implements OnInit {
   bsInlineRangeValue: Date[];
   maxDate = new Date();
 
+
   constructor(
     private authService: AuthService,
     private alertify: AlertifyService,
     private fb: FormBuilder
   ) {
-    this.maxDate.setDate(this.maxDate.getDate() + 7);
+    this.maxDate.setFullYear(2000,1,1);
     this.bsInlineRangeValue = [this.bsInlineValue, this.maxDate];
   }
 
