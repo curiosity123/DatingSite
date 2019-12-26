@@ -15,13 +15,22 @@ export class RegisterComponent implements OnInit {
   model: any = {};
   registerForm: FormGroup;
 
+
+  bsInlineValue = new Date();
+  bsInlineRangeValue: Date[];
+  maxDate = new Date();
+
   constructor(
     private authService: AuthService,
     private alertify: AlertifyService,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.maxDate.setDate(this.maxDate.getDate() + 7);
+    this.bsInlineRangeValue = [this.bsInlineValue, this.maxDate];
+  }
 
   ngOnInit() {
+
     this.buildForm();
   }
 
@@ -29,6 +38,14 @@ export class RegisterComponent implements OnInit {
   buildForm()
   {
   this.registerForm = this.fb.group({
+
+    gender: ['female', Validators.required],
+    dateOfBirth: [null, Validators.required],
+    zodiacSign: ['', Validators.required],
+    city : ['', Validators.required],
+    country: ['', Validators.required],
+
+
   userName: ['', Validators.required],
   password: ['', [
         Validators.required,

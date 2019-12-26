@@ -11,6 +11,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule, CustomHammerConfig } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -36,6 +37,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotosComponent } from './photos/photos.component';
 
+
 class CustomHammerConfig2 extends HammerGestureConfig {
   overrides = {
     pinch: { enable: false },
@@ -58,7 +60,8 @@ export function tokenGetter() {
     UserCardComponent,
     UserDatailComponent,
     UserEditComponent,
-    PhotosComponent
+    PhotosComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,9 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
     AuthService,
