@@ -7,7 +7,9 @@
       class="form-control"
       placeholder="User name"
       formControlName="userName"
+      [ngClass]= "{'is-invalid' : registerForm.get('userName').errors && registerForm.get('userName').touched}"
     />
+    <div class="invalid-feedback">Enter user name</div>
   </div>
   <div class="form-group">
     <input
@@ -15,7 +17,11 @@
       class="form-control"
       placeholder="Password"
       formControlName="password"
+      [ngClass]= "{'is-invalid' : registerForm.get('password').errors && registerForm.get('password').touched}"
     />
+    <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">Password is required</div>
+    <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched" >Password need at least 6 signs</div>
+    <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched">Password might have max 14 signs</div>
   </div>
 
   <div class="form-group">
@@ -24,7 +30,13 @@
       class="form-control"
       placeholder="Confirm password"
       formControlName="confirmPassword"
-    />
+      [ngClass]= "{'is-invalid' : registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched ||
+      registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched }"
+      />
+      <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">Password is required</div>
+      <div class="invalid-feedback" *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched" >Password not match</div>
+
+  
   </div>
 
   <div class="form-group text-center">
@@ -34,5 +46,3 @@
     </button>
   </div>
 </form>
-<p>{{registerForm.value | json}} </p>
-<p>{{registerForm.status |json}} </p>
