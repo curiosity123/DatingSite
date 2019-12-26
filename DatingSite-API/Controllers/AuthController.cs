@@ -37,12 +37,12 @@ namespace DatingSite_API.Controllers
             if (await _repository.UserExists(userForRegisterDto.UserName))
                 return BadRequest("Użytkownik o takiej nazwie już istnieje");
 
-            var userToCreate = new User
-            {
-                UserName = userForRegisterDto.UserName
-            };
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
             var createdUser = await _repository.Register(userToCreate, userForRegisterDto.Password);
-            return StatusCode(201);
+            var userToReturn = _mapper.Map<UserForDetailsDto>(createdUser);
+
+
+            return CreatedAtRoute("GetUser",  new {controller = "Users", id =createdUser.Id},userToReturn);
         }
 
         [HttpPost("login")]
