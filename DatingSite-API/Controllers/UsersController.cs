@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DatingSite_API.Data;
 using DatingSite_API.Dtos;
+using DatingSite_API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace DatingSite_API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]

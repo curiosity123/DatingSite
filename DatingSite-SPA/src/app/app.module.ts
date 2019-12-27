@@ -12,6 +12,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule, CustomHammerConfig } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -61,6 +62,7 @@ export function tokenGetter() {
     UserDatailComponent,
     UserEditComponent,
     PhotosComponent,
+    TimeAgoPipe,
 
   ],
   imports: [
