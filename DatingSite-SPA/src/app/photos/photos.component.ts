@@ -86,6 +86,13 @@ export class PhotosComponent implements OnInit {
           this.fileUploadProgress = '';
           this.previewUrl = null;
           this.photos.push(events.body as Photo);
+          if (this.photos.length === 1)
+          {
+            this.currentMain = this.photos.filter(x => x.isMain === true)[0];
+            this.currentMain.isMain = false;
+            (events.body as Photo).isMain = true;
+            this.OnMainPhotoChanged.emit((events.body as Photo).url);
+          }
           console.log(events.body);
           this.alertify.success('Added sucessfully!!');
         }
@@ -100,7 +107,7 @@ export class PhotosComponent implements OnInit {
           this.currentMain = this.photos.filter(x => x.isMain === true)[0];
           this.currentMain.isMain = false;
           photo.isMain = true;
-          this.OnMainPhotoChanged.emit(photo.url);
+          this.OnMainPhotoChanged.emit(photo.url);     
         },
         error => this.alertify.error('Error')
       );
