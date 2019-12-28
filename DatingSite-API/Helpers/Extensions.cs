@@ -26,7 +26,7 @@ namespace DatingSite_API.Helpers
         {
             var paginationHeader = new PaginationHeader(currentPage,pageSize,totalItems,totalPages);
             response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationHeader));
-            response.Headers.Add("Access-Control-Expose-Headers", "Pagination-Error");
+            response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
         }
     }
 }

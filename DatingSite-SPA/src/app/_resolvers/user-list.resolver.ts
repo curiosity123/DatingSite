@@ -8,8 +8,8 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class UserListResolver implements Resolve<User[]> {
-  pageNumber = 0;
-  pageSize = 5;
+  pageNumber = 1;
+  pageSize = 18;
 
   constructor(
     private userService: UserService,

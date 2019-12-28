@@ -1,16 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { User } from "src/app/models/User";
-import { UserService } from "src/app/_services/user.service";
-import { AlertifyService } from "src/app/_services/alertify.service";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/User';
+import { UserService } from 'src/app/_services/user.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Pagination, PaginationResult } from 'src/app/models/Pagination';
 
 @Component({
-  selector: "app-user-list",
-  templateUrl: "./user-list.component.html",
-  styleUrls: ["./user-list.component.css"]
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
   users: User[];
+  pagin: Pagination;
 
   constructor(
     private userService: UserService,
@@ -19,19 +21,30 @@ export class UserListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.data.subscribe(data => (this.users = data.users.result ));
-    // this.loadUsers();
+    this.route.data.subscribe(data => { 
+      this.users = data.users.result;
+      this.pagin = data.users.pagination;
+       console.log(this.pagin);
+    });
+  } 
+
+  pageChanged(event: any) {
+    this.pagin.CurrentPage = event.page;   
+   
+    this.loadUsers();
   }
 
-  /*
-loadUsers()
-{
-  this.userService.getUsers().subscribe((users: User[])=>
-    {
-      this.users = users;
-    }, error =>
-    {
-      this.alertify.error(error);
-    });
-}*/
+  loadUsers() {
+    this.userService
+      .getUsers(this.pagin.CurrentPage, this.pagin.PageSize)
+      .subscribe(
+        (res: PaginationResult<User[]>) => {
+          this.users = res.result;
+          this.pagin = res.pagination;    
+        },
+        error => {
+          this.alertify.error(error);
+        }
+      );
+  }
 }

@@ -22,15 +22,19 @@ export class UserService {
 
     if (page != null && itemsPerPage != null) {
       params = params.append('CurrentPage', page);
-      params = params.append('pageSize', itemsPerPage);
+      params = params.append('PageSize', itemsPerPage);
     }
 
     return this.http.get<User[]>(this.baseUrl + 'users', {observe: 'response', params}).pipe(
       map(response => {
-        paginationResult.result = response.body;
+        paginationResult.result = response.body;  
+       
         if(response.headers.get('Pagination') != null)
         {
+        
           paginationResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          console.log("resposne");
+   console.log(response.headers.get('Pagination'));
         }
 
         return paginationResult;
