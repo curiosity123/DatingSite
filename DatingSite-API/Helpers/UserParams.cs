@@ -9,8 +9,15 @@ namespace DatingSite_API.Helpers
         public int PageSize
         {
             get { return pageSize; }
-            set { pageSize = (value> MaxPageSize)? 48 : value; }
+            set { pageSize = (value > MaxPageSize) ? 48 : value; }
         }
-        
+
+        public int UserId { get; set; }
+        public string Gender { get; set; }
+        public int MinAge { get; set; } = 18;
+        public int MaxAge { get; set; } = 100;
+        public string City { get; set; }
+
+        public string MartialStatus { get; set; }
     }
 }
