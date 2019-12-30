@@ -15,6 +15,7 @@ export class UserListComponent implements OnInit {
   users: User[];
   userParams: UserParams = new UserParams();
   pagin: Pagination;
+  isCollapsed = false;
 
   constructor(
     private userService: UserService,

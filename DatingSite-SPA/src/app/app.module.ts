@@ -15,6 +15,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -90,7 +91,8 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    CollapseModule.forRoot(),
   ],
   providers: [
     AuthService,
