@@ -14,6 +14,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -38,6 +39,7 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotosComponent } from './photos/photos.component';
+import { UserListFilterComponent } from './users/user-list-filter/user-list-filter.component';
 
 
 class CustomHammerConfig2 extends HammerGestureConfig {
@@ -57,6 +59,7 @@ export function tokenGetter() {
     HomeComponent,
     RegisterComponent,
     UserListComponent,
+    UserListFilterComponent,
     LikesComponent,
     MessagesComponent,
     UserCardComponent,
@@ -86,7 +89,8 @@ export function tokenGetter() {
     NgxGalleryModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot()
   ],
   providers: [
     AuthService,

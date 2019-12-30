@@ -4,6 +4,7 @@ import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Pagination, PaginationResult } from 'src/app/models/Pagination';
+import { UserParams } from 'src/app/models/UserParams';
 
 @Component({
   selector: 'app-user-list',
@@ -12,6 +13,7 @@ import { Pagination, PaginationResult } from 'src/app/models/Pagination';
 })
 export class UserListComponent implements OnInit {
   users: User[];
+  userParams: UserParams = new UserParams();
   pagin: Pagination;
 
   constructor(
@@ -21,22 +23,27 @@ export class UserListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.data.subscribe(data => { 
+    this.route.data.subscribe(data => {
       this.users = data.users.result;
       this.pagin = data.users.pagination;
-       console.log(this.pagin);
     });
   } 
 
+  SetNewFilter(event)
+  {
+    console.log(event);
+    this.userParams = event;
+    this.loadUsers();
+  }
+
   pageChanged(event: any) {
-    this.pagin.CurrentPage = event.page;   
-   
+    this.pagin.CurrentPage = event.page;
     this.loadUsers();
   }
 
   loadUsers() {
     this.userService
-      .getUsers(this.pagin.CurrentPage, this.pagin.PageSize)
+      .getUsers(this.pagin.CurrentPage, this.pagin.PageSize, this.userParams)
       .subscribe(
         (res: PaginationResult<User[]>) => {
           this.users = res.result;

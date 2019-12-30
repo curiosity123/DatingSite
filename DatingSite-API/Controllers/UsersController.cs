@@ -37,12 +37,7 @@ namespace DatingSite_API.Controllers
             var currentUser = await _repo.GetUser(userId);
             userParams.UserId = userId;
 
-            if (string.IsNullOrEmpty(userParams.Gender))
-            {
-                userParams.Gender = currentUser.Gender == "female" ? "male" : "female";
-            }
-
-
+     
             var users = await _repo.GetUsers(userParams);
             var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
 

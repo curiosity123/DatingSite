@@ -42,16 +42,31 @@ namespace DatingSite_API.Data
                 users = users.Where(u => u.City == userParams.City);
 
             if (userParams.Gender != null)
-                users = users.Where(u => u.Gender != userParams.Gender);
+                users = users.Where(u => u.Gender == userParams.Gender);
+
 
             if (userParams.MinAge != 18)
                 users = users.Where(u => u.DateOfBirth <= DateTime.Now.AddYears(-userParams.MinAge));
             if (userParams.MaxAge != 100)
                 users = users.Where(u => u.DateOfBirth >= DateTime.Now.AddYears(-userParams.MaxAge));
 
-                
+
             if (userParams.MartialStatus != null)
                 users = users.Where(u => u.MartialStatus == userParams.MartialStatus);
+
+            if (userParams.Children != null)
+                users = users.Where(u => u.Children == userParams.Children);
+
+
+
+
+
+
+            if (userParams.SortByLastActive == true)
+                users = users.OrderByDescending(x => x.LastActive);
+            else
+                users = users.OrderByDescending(x => x.Created);
+
 
             return await PagedList<User>.CreatedListAsync(users, userParams.CurrentPage, userParams.PageSize);
 

@@ -1,0 +1,54 @@
+<div class="container mb-3">
+  <div class="row">
+    <div class="ml-2">
+      <p>Age range</p>
+      <input class="mr-2 input-number" type="number" [(ngModel)]="userParams.minAge" />
+
+      <input class="input-number" type="number" [(ngModel)]="userParams.maxAge" />
+    </div>
+
+    <div class="ml-2">
+      <p>City</p>
+      <input type="text" [(ngModel)]="userParams.city" />
+    </div>
+
+    <div class="ml-2">
+      <p>Martial status</p>
+      <input type="text" [(ngModel)]="userParams.martialStatus" />
+    </div>
+
+    <div class="ml-2">
+      <p>Children</p>
+      <input type="text" [(ngModel)]="userParams.children" />
+    </div>
+
+    <div class="ml-2">
+      <form [formGroup]="myForms" class="form-inline mt-4">
+        <div class="form-group">
+          <div class="btn-group" btnRadioGroup formControlName="gender">
+            <label btnRadio="kobieta" class="btn btn-danger" tabindex="0" role="button" (click)="CommitFilter()">Woman</label>
+            <label btnRadio="mężczyzna" (click)="CommitFilter()" class="btn btn-danger" tabindex="0"
+              role="button">Man</label>
+          </div>
+        </div>
+
+        <div class="form-group ml-2">
+          <div class="btn-group" btnRadioGroup formControlName="filter">
+            <label btnRadio="Created" class="btn btn-info" tabindex="0" role="button" (click)="CommitFilter()">Sort
+              by created date</label>
+            <label btnRadio="Last active" (click)="CommitFilter()" class="btn btn-info" tabindex="0"
+              role="button">Sort by last activity</label>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="mt-4 ml-2">
+      <button class="btn btn-info" (click)="CommitFilter()">Search</button>
+    </div>
+    <div class="mt-4 ml-2">
+      <button class="btn btn-danger" (click)="ClearFilter()">Clear filter</button>
+    </div>
+
+  </div>
+</div>

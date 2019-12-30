@@ -19,5 +19,8 @@ namespace DatingSite_API.Helpers
         public string City { get; set; }
 
         public string MartialStatus { get; set; }
+        public string Children { get; set; }
+
+        public bool SortByLastActive {get;set;}= false;
     }
 }
