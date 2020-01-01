@@ -60,7 +60,7 @@ namespace DatingSite_API.Models
 
         public string Sport { get; set; }
 
-        public string  Movies { get; set; }
+        public string Movies { get; set; }
 
         public string Music { get; set; }
 
@@ -76,9 +76,10 @@ namespace DatingSite_API.Models
 
         //photos    
 
-        public ICollection<Photo> Photos  {get;set;}
+        public ICollection<Photo> Photos { get; set; }
 
-
+        public ICollection<Like> UserLikes { get; set; }
+        public ICollection<Like> UserIsLiked { get; set; }
 
     }
 }

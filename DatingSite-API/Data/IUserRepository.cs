@@ -11,5 +11,8 @@ namespace DatingSite_API.Data
          Task<User> GetUser(int Id);
 
          Task<Photo> GetPhoto(int Id);
+
+         Task<Like> GetLike(int userId, int likedUserId);
+
     }
 }

@@ -21,6 +21,13 @@ namespace DatingSite_API.Helpers
         public string MartialStatus { get; set; }
         public string Children { get; set; }
 
-        public bool SortByLastActive {get;set;}= false;
+        public bool SortByLastActive { get; set; } = false;
+
+
+        public bool UserLikes { get; set; } = false;
+
+        public bool UserIsLiked { get; set; } = false;
+
+
     }
 }

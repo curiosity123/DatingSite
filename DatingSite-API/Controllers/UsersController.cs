@@ -6,6 +6,7 @@ using AutoMapper;
 using DatingSite_API.Data;
 using DatingSite_API.Dtos;
 using DatingSite_API.Helpers;
+using DatingSite_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,7 @@ namespace DatingSite_API.Controllers
             var currentUser = await _repo.GetUser(userId);
             userParams.UserId = userId;
 
-     
+
             var users = await _repo.GetUsers(userParams);
             var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
 
@@ -67,6 +68,37 @@ namespace DatingSite_API.Controllers
 
 
             throw new System.Exception("update failed");
+
+        }
+
+
+        [HttpPost("{id}/like/{likedUserId}")]
+        public async Task<IActionResult> LikeUser(int id, int likedUserId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            Like likeFromRepo = await _repo.GetLike(id, likedUserId);
+
+            if (likeFromRepo != null)
+                return BadRequest("already liked");
+
+            var likedUser = await _repo.GetUser(likedUserId);
+
+            if (likedUser == null)
+                return NotFound();
+
+            var like = new Like()
+            {
+                UserLikesId = id,
+                UserIsLikedId = likedUserId
+            };
+            _repo.Add<Like>(like);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("save like error");
 
         }
 
