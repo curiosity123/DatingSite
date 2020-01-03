@@ -7,7 +7,7 @@
     <img src="{{ (user.photoUrl || '../../../../assets/user.png')}}" class="card-img-top" alt="{{ user.userName }}" />
     <ul class="list-inline text-center user-icons animate">
       <li class="list-inline-item">
-        <button class="btn btn-warning btn-sm"><i class="fa fa-heart">
+        <button class="btn btn-warning btn-sm" (click)="like(user.id)"><i class="fa fa-heart">
           </i>
         </button>
       </li>

@@ -1,3 +1,28 @@
-<p>
-  likes works!
-</p>
+<div class="text-center mt-3">
+  <h2>{{likeParams==='UserLikes' ? 'Who likes me':'Who I like' }}: {{pagin.TotalItems}}</h2>
+
+  <div class="container mt-3">
+    <div class="row m-3">
+      <button class="btn btn-primary mr-2" [(ngModel)]="likeParams" btnRadio="UserLikes" (click)="loadUsers()">They like
+        me</button>
+      <button class="btn btn-primary" [(ngModel)]="likeParams" btnRadio="UserIsLiked" (click)="loadUsers()">I like
+        them</button>
+    </div>
+
+    <div class="row m-3">
+      <div *ngFor="let user of users" class="col-lg-2 col-md-4 col-sm-6">
+        <app-user-card [user]="user"></app-user-card>
+      </div>
+    </div>
+
+    <div class="d-flex justify-container-center">
+      <pagination [boundaryLinks]="true" [totalItems]="pagin.TotalItems" [itemsPerPage]="pagin.PageSize"
+        [(ngModel)]="pagin.CurrentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+        lastText="&raquo;" (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+
+
+  </div>
+
+</div>

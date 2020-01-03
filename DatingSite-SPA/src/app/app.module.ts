@@ -41,6 +41,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotosComponent } from './photos/photos.component';
 import { UserListFilterComponent } from './users/user-list-filter/user-list-filter.component';
+import { UserLikesResolver } from './_resolvers/user-likes.resolver';
 
 
 class CustomHammerConfig2 extends HammerGestureConfig {
@@ -102,6 +103,7 @@ export function tokenGetter() {
     ErrorInterceptorProvider,
     UserDetailResolver,
     UserListResolver,
+    UserLikesResolver,
     UserEditResolver,
     PreventUnsavedChanges,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig2 }
