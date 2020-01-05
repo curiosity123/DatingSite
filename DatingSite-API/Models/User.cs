@@ -80,6 +80,8 @@ namespace DatingSite_API.Models
 
         public ICollection<Like> UserLikes { get; set; }
         public ICollection<Like> UserIsLiked { get; set; }
-
+      public ICollection<Message> MessagesSent { get; set; }
+      
+      public ICollection<Message> MessagesReceived { get; set; }
     }
 }

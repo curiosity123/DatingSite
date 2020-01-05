@@ -5,14 +5,19 @@ using DatingSite_API.Models;
 
 namespace DatingSite_API.Data
 {
-    public interface IUserRepository:IGenericRepository
+    public interface IUserRepository : IGenericRepository
     {
-         Task<PagedList<User>> GetUsers(UserParams userParams);
-         Task<User> GetUser(int Id);
+        Task<PagedList<User>> GetUsers(UserParams userParams);
+        Task<User> GetUser(int Id);
 
-         Task<Photo> GetPhoto(int Id);
+        Task<Photo> GetPhoto(int Id);
 
-         Task<Like> GetLike(int userId, int likedUserId);
+        Task<Like> GetLike(int userId, int likedUserId);
 
+
+        Task<Message> GetMessage(int id);
+        Task<PagedList<Message>> GetMessageForUser();
+
+        Task<IEnumerable<Message>> GetConversation(int userId, int recipientId);
     }
 }

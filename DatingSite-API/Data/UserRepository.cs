@@ -18,9 +18,24 @@ namespace DatingSite_API.Data
             _context = context;
         }
 
+        public async Task<IEnumerable<Message>> GetConversation(int userId, int recipientId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Like> GetLike(int userId, int likedUserId)
         {
             return await _context.Likes.Where(u => u.UserLikesId == userId && u.UserIsLikedId == likedUserId).FirstOrDefaultAsync();
+        }
+
+        public async Task<Message> GetMessage(int id)
+        {
+           return await _context.Messages.FirstOrDefaultAsync(m=> m.Id== id);
+        }
+
+        public async Task<PagedList<Message>> GetMessageForUser()
+        {
+            throw new NotImplementedException();
         }
 
         public Task<Photo> GetPhoto(int Id)
