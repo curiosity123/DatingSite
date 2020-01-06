@@ -43,6 +43,7 @@ import { PhotosComponent } from './photos/photos.component';
 import { UserListFilterComponent } from './users/user-list-filter/user-list-filter.component';
 import { UserLikesResolver } from './_resolvers/user-likes.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { UserMessagesComponent } from './users/user-messages/user-messages.component';
 
 
 class CustomHammerConfig2 extends HammerGestureConfig {
@@ -70,6 +71,7 @@ export function tokenGetter() {
     UserEditComponent,
     PhotosComponent,
     TimeAgoPipe,
+    UserMessagesComponent
 
   ],
   imports: [

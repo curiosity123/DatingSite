@@ -130,6 +130,11 @@ export class UserService {
 
   }
 
+  GetConversation(id: number, recipientId: number) {
+    return this.http.get<Message[]>(
+      this.baseUrl + 'users/' + id + '/messages/conversation/' + recipientId ,  {});
+  }
+
   DeletePhoto(id: number, photoId: number) {
     return this.http.delete(
       this.baseUrl + 'users/' + id + '/photos/' + photoId + '/deletePhoto',
