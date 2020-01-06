@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from '../models/User';
 import { PaginationResult, Pagination } from '../models/Pagination';
 import { map } from 'rxjs/operators';
+import { Message } from '../models/Message';
 
 @Injectable({
   providedIn: 'root'
@@ -25,28 +26,29 @@ export class UserService {
       params = params.append('PageSize', itemsPerPage);
     }
 
-if(likeParams=='UserLikes')
-{
-  params = params.append('UserLikes', 'true');
-}
+    if (likeParams == 'UserLikes') {
+      params = params.append('UserLikes', 'true');
+    }
 
-if(likeParams=='UserIsLiked')
-{
-  params = params.append('UserIsLiked', 'true');
-}
+    if (likeParams == 'UserIsLiked') {
+      params = params.append('UserIsLiked', 'true');
+    }
 
 
     if (filter != null) {
       params = params.append('minAge', filter.minAge);
       params = params.append('maxAge', filter.maxAge);
-      if (filter.gender != '')
+      if (filter.gender != '') {
         params = params.append('gender', filter.gender);
+      }
 
-      if (filter.martialStatus != '')
+      if (filter.martialStatus != '') {
         params = params.append('martialStatus', filter.martialStatus);
+      }
 
-      if (filter.children != '')
+      if (filter.children != '') {
         params = params.append('children', filter.children);
+      }
 
 
       if (filter.city != '') {
@@ -97,6 +99,36 @@ if(likeParams=='UserIsLiked')
     );
   }
 
+  getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
+    const paginationResult: PaginationResult<Message[]> = new PaginationResult<
+      Message[]
+    >();
+    let params = new HttpParams();
+
+    params = params.append('messageContainer', messageContainer);
+
+    if (page != null && itemsPerPage != null) {
+      params = params.append('CurrentPage', page);
+      params = params.append('PageSize', itemsPerPage);
+    }
+
+
+
+    return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages', { observe: 'response', params }).pipe(
+      map(response => {
+        paginationResult.result = response.body;
+
+        if (response.headers.get('Pagination') != null) {
+
+          paginationResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+
+        return paginationResult;
+      })
+
+    );
+
+  }
 
   DeletePhoto(id: number, photoId: number) {
     return this.http.delete(

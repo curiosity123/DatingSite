@@ -1,3 +1,65 @@
-<p>
-  messages works!
-</p>
+<div class="container mt-5">
+
+  <div class="row">
+    <div class="btn-group">
+      <button class="btn btn-primary " [(ngModel)]="messageContainer" btnRadio="Unread" (click)="loadMessages()">
+        <i class="fa fa-envelope"> Unread</i>
+      </button>
+
+      <button class="btn btn-primary" [(ngModel)]="messageContainer" btnRadio="Inbox" (click)="loadMessages()">
+        <i class="fa fa-envelope"> Inbox</i>
+      </button>
+
+      <button class="btn btn-primary" [(ngModel)]="messageContainer" btnRadio="Outbox" (click)="loadMessages()">
+        <i class="fa fa-envelope"> Outbox</i>
+      </button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="messages.length == 0">
+    <h3>No messages</h3>
+  </div>
+
+  <div class="row" *ngIf="messages.length > 0">
+    <table class="table table-hover">
+      <tr>
+        <th style="width: 40%;">Message</th>
+        <th style="width: 20%;">From/To</th>
+        <th style="width: 20%;">Sent/Received</th>
+        <th style="width: 20%;"></th>
+      </tr>
+      <tr *ngFor="let message of messages"
+        [routerLink]="['/users', messageContainer == 'Outbox' ? message.recipientId : message.senderId]">
+
+        <td>{{message.content}}</td>
+        <td>
+          <div *ngIf="messageContainer != 'Outbox'">
+            <img src="{{message.senderPhotoUrl}}" class="img-circle rounded-circle  mr-1">
+            <strong>{{message.senderUserName}}</strong>
+          </div>
+
+          <div *ngIf="messageContainer == 'Outbox'">
+            <img src="{{message.recipientPhotoUrl}}" class="img-circle rounded-circle  mr-1">
+            <strong>{{message.recipientUserName}}</strong>
+          </div>
+        </td>
+      <td>{{message.dateSend | timeAgo}}</td>
+ 
+
+      <td><button class="btn btn-primary fa fa-trash"> Remove</button></td>
+
+    </tr>
+    </table>
+  </div>
+
+
+
+  <div class="d-flex justify-content-center">
+    <pagination [boundaryLinks]="true" [totalItems]="pagin.TotalItems" [itemsPerPage]="pagin.PageSize"
+      [(ngModel)]="pagin.CurrentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+      (pageChanged)="pageChanged($event)">
+    </pagination>
+  </div>
+
+
+</div>
