@@ -14,6 +14,7 @@ export class UserMessagesComponent implements OnInit {
 
   @Input() RecipientId: number;
   messages: Message[];
+  newMessage: any = {};
 
 
   constructor(
@@ -24,7 +25,13 @@ export class UserMessagesComponent implements OnInit {
   ngOnInit() {
     this.LoadConversation();
   }
-
+  sendMessage() {
+    this.newMessage.RecipientId = this.RecipientId;
+    this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage).subscribe((msg: Message) => {
+      this.messages.unshift(msg);
+      this.newMessage.content = '';
+    }, error => this.alertify.error(error));
+  }
 
   LoadConversation() {
     this.userService.GetConversation(this.authService.decodedToken.nameid, this.RecipientId)

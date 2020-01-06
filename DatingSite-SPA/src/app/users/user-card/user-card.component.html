@@ -15,7 +15,7 @@
         <button class="btn btn-warning btn-sm"><i class="fa fa-user" [routerLink]="['/users/', user.id]" routerLinkActive="router-link-active" ></i></button>
       </li>
       <li class="list-inline-item">
-        <button class="btn btn-warning btn-sm"><i class="fa fa-envelope"></i></button>
+        <button class="btn btn-warning btn-sm"><i class="fa fa-envelope"[routerLink]="['/users/', user.id]"  [queryParams]="{tab:5}"></i></button>
       </li>
     </ul>
   </div>

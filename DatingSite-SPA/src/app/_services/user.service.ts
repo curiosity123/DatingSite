@@ -132,13 +132,20 @@ export class UserService {
 
   GetConversation(id: number, recipientId: number) {
     return this.http.get<Message[]>(
-      this.baseUrl + 'users/' + id + '/messages/conversation/' + recipientId ,  {});
+      this.baseUrl + 'users/' + id + '/messages/conversation/' + recipientId, {});
   }
 
-  DeletePhoto(id: number, photoId: number) {
-    return this.http.delete(
-      this.baseUrl + 'users/' + id + '/photos/' + photoId + '/deletePhoto',
-      {}
-    );
+
+  sendMessage(id: number, message: string) {
+    return this.http.post(
+      this.baseUrl + 'users/' + id + '/messages', message);
   }
+
+
+DeletePhoto(id: number, photoId: number) {
+  return this.http.delete(
+    this.baseUrl + 'users/' + id + '/photos/' + photoId + '/deletePhoto',
+    {}
+  );
+}
 }

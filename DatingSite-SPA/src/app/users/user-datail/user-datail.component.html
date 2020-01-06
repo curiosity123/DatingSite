@@ -35,7 +35,7 @@
         <div class="card-footer">
           <div class="btn-group d-flex">
             <button class="btn btn-danger w-100">Like</button>
-            <button class="btn btn-success w-100">Message</button>
+            <button class="btn btn-success w-100" (click)="selectTab(5)">Message</button>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
 
     <div class="col-sm-8">
       <div class="tab-panel">
-        <tabset class="user-tabset">
+        <tabset class="user-tabset" #userTabs >
           <tab heading="General">
             <table class="user-table">
               <tr>

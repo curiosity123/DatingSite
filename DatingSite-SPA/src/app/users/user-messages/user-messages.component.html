@@ -45,13 +45,13 @@
 
     </ul>
 
-  </div>
+  </div> 
   <div class="card">
-    <form action="">
+    <form #messageForm="ngForm" >
       <div class="input-group">
-        <input type="text" class="form-control input-sm" placeholder="Send message">
+        <input type="text" class="form-control input-sm" placeholder="Send message" [(ngModel)]="newMessage.content" name="content" required>
         <div class="input-group-append">
-          <button class="btn- btn-primary">
+          <button class="btn- btn-primary" type="button"  (click)="messageForm.valid && sendMessage()">
             Send
           </button>
         </div>
