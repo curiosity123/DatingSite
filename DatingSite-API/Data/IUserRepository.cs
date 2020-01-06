@@ -16,7 +16,7 @@ namespace DatingSite_API.Data
 
 
         Task<Message> GetMessage(int id);
-        Task<PagedList<Message>> GetMessageForUser();
+        Task<PagedList<Message>> GetMessageForUser(MessageParams messageParams);
 
         Task<IEnumerable<Message>> GetConversation(int userId, int recipientId);
     }
