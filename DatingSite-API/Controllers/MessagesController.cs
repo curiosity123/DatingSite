@@ -48,10 +48,45 @@ namespace DatingSite_API.Controllers
 
 
 
+
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> DeleteMessage(int id, int userId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var message = await _repo.GetMessage(id);
+            if (message == null)
+                return NoContent();
+
+            if (message.SenderId == userId)
+                message.SenderDeleted = true;
+            else
+                message.RecipientDeleted = true;
+
+
+            if (message.RecipientDeleted && message.SenderDeleted)
+            {
+                _repo.Delete(message);
+
+            }
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+
+            throw new System.Exception("remove message error");
+        }
+
+
         [HttpPost()]
         public async Task<IActionResult> CreateMessage(int userId, MessageForCreationDto messageForCreationDto)
         {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+
+
+            var sender = await _repo.GetUser(userId);
+            if (sender.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             messageForCreationDto.SenderId = userId;
@@ -64,10 +99,12 @@ namespace DatingSite_API.Controllers
             _repo.Add(message);
 
 
-            var messageForReturn = _mapper.Map<MessageForCreationDto>(message);
 
             if (await _repo.SaveAll())
+            {
+                var messageForReturn = _mapper.Map<MessageToReturnDto>(message);
                 return CreatedAtRoute("GetMessage", new { id = message.Id }, messageForReturn);
+            }
 
             return BadRequest("saving error");
         }
@@ -95,7 +132,7 @@ namespace DatingSite_API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var messagesFromRepo = await _repo.GetConversation(userId,recipientId);
+            var messagesFromRepo = await _repo.GetConversation(userId, recipientId);
             var messageToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
 
             return Ok(messageToReturn);

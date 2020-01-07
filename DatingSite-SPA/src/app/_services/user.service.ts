@@ -141,6 +141,10 @@ export class UserService {
       this.baseUrl + 'users/' + id + '/messages', message);
   }
 
+  deleteMessage(id: number, userId: number) {
+    return this.http.delete(
+      this.baseUrl + 'users/' + userId + '/messages/' + id, {});
+  }
 
 DeletePhoto(id: number, photoId: number) {
   return this.http.delete(

@@ -48,15 +48,15 @@ namespace DatingSite_API.Data
             switch (messageParams.MessageContainer)
             {
                 case "Inbox":
-                    messages = messages.Where(x => x.RecipientId == messageParams.UserId);
+                    messages = messages.Where(x => x.RecipientId == messageParams.UserId  && !x.RecipientDeleted);
                     break;
 
                 case "Outbox":
-                    messages = messages.Where(x => x.SenderId == messageParams.UserId);
+                    messages = messages.Where(x => x.SenderId == messageParams.UserId && !x.SenderDeleted);
                     break;
 
                 default:
-                    messages = messages.Where(x => x.RecipientId == messageParams.UserId && !x.IsRead);
+                    messages = messages.Where(x => x.RecipientId == messageParams.UserId && !x.IsRead && !x.RecipientDeleted);
                     break;
             }
 

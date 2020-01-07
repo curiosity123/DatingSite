@@ -16,10 +16,10 @@ export class MessagesComponent implements OnInit {
 
   pagin: Pagination;
   messages: Message[];
-  messageContainer= 'Inbox'
+  messageContainer = 'Inbox'
 
 
-  constructor(    
+  constructor(
     private userService: UserService,
     private alertify: AlertifyService,
     private authService: AuthService,
@@ -46,12 +46,23 @@ export class MessagesComponent implements OnInit {
         (res: PaginationResult<Message[]>) => {
           this.messages = res.result;
           console.log(this.messages);
-          this.pagin = res.pagination;    
+          this.pagin = res.pagination;
         },
         error => {
           this.alertify.error(error);
         }
       );
   }
+
+
+  deleteMessage(id: number) {
+    this.alertify.confirm('Do you realy want to remove this message', () => {
+      this.userService.deleteMessage(id, this.authService.decodedToken.nameid).subscribe(() => {
+        this.messages.splice(this.messages.findIndex(m => m.id === id), 1);
+
+        this.alertify.success('message removed');
+      }, error => this.alertify.error('delete message failed'));
+  });
+}
 
 }
