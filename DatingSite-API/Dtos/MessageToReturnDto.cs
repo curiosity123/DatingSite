@@ -17,6 +17,8 @@ namespace DatingSite_API.Dtos
         public DateTime DateSend { get; set; }
         public bool SenderDeleted { get; set; }
         public bool RecipientDeleted { get; set; }
+
+        public string MessageContainer { get; set; }        
         
     }
 }

@@ -24,8 +24,11 @@
     <table class="table table-hover">
       <tr>
         <th style="width: 40%;">Message</th>
-        <th style="width: 20%;">From/To</th>
-        <th style="width: 20%;">Sent/Received</th>
+        <th style="width: 20%;" *ngIf="!flagOutbox">From</th>
+
+        <th style="width: 20%;" *ngIf="flagOutbox">To</th>
+        <th style="width: 20%;" *ngIf="flagOutbox">Sent</th>
+        <th style="width: 20%;" *ngIf="!flagOutbox">Received</th>
         <th style="width: 20%;"></th>
       </tr>
       <tr *ngFor="let message of messages"
@@ -46,7 +49,7 @@
       <td>{{message.dateSend | timeAgo}}</td>
  
 
-      <td><button class="btn btn-primary fa fa-trash" (click)="deleteMessage(message.id)" (click)="$event.stopPropagation"> Remove</button></td>
+      <td><button class="btn btn-primary fa fa-trash" (click)="deleteMessage(message.id)" (click)="$event.stopPropagation()"> Remove</button></td>
 
     </tr>
     </table>

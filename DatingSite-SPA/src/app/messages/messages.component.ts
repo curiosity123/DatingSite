@@ -13,17 +13,18 @@ import { AuthService } from '../_services/auth.service';
 })
 export class MessagesComponent implements OnInit {
 
-
-  pagin: Pagination;
-  messages: Message[];
-  messageContainer = 'Inbox'
-
-
   constructor(
     private userService: UserService,
     private alertify: AlertifyService,
     private authService: AuthService,
     private route: ActivatedRoute) { }
+
+
+  pagin: Pagination;
+  messages: Message[];
+  messageContainer = 'Inbox';
+  flagOutbox = false;
+
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -47,6 +48,13 @@ export class MessagesComponent implements OnInit {
           this.messages = res.result;
           console.log(this.messages);
           this.pagin = res.pagination;
+          if (res.result[0].messageContainer === 'Outbox') {
+            this.flagOutbox = true;
+          }
+          else
+          {
+            this.flagOutbox = false;
+          }
         },
         error => {
           this.alertify.error(error);
@@ -56,12 +64,12 @@ export class MessagesComponent implements OnInit {
 
 
   deleteMessage(id: number) {
-    this.alertify.confirm('Do you realy want to remove this message', () => {
-      this.userService.deleteMessage(id, this.authService.decodedToken.nameid).subscribe(() => {
-        this.messages.splice(this.messages.findIndex(m => m.id === id), 1);
+  this.alertify.confirm('Do you realy want to remove this message', () => {
+    this.userService.deleteMessage(id, this.authService.decodedToken.nameid).subscribe(() => {
+      this.messages.splice(this.messages.findIndex(m => m.id === id), 1);
 
-        this.alertify.success('message removed');
-      }, error => this.alertify.error('delete message failed'));
+      this.alertify.success('message removed');
+    }, error => this.alertify.error('delete message failed'));
   });
 }
 

@@ -121,6 +121,12 @@ namespace DatingSite_API.Controllers
             var messageToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
 
             Response.AddPagination(messagesFromRepo.CurrentPage, messagesFromRepo.PageSize, messagesFromRepo.TotalCount, messagesFromRepo.TotalPages);
+           
+           foreach (var m in messageToReturn)
+           {
+               m.MessageContainer = messageParams.MessageContainer;
+           }
+           
             return Ok(messageToReturn);
 
         }

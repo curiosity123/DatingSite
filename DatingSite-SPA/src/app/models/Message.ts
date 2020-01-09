@@ -13,4 +13,5 @@ export class Message {
    isRead: boolean;
    dateRead: Date;
    dateSend: Date;
+   messageContainer: string;
 }
