@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -121,12 +122,12 @@ namespace DatingSite_API.Controllers
             var messageToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
 
             Response.AddPagination(messagesFromRepo.CurrentPage, messagesFromRepo.PageSize, messagesFromRepo.TotalCount, messagesFromRepo.TotalPages);
-           
-           foreach (var m in messageToReturn)
-           {
-               m.MessageContainer = messageParams.MessageContainer;
-           }
-           
+
+            foreach (var m in messageToReturn)
+            {
+                m.MessageContainer = messageParams.MessageContainer;
+            }
+
             return Ok(messageToReturn);
 
         }
@@ -142,6 +143,29 @@ namespace DatingSite_API.Controllers
             var messageToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
 
             return Ok(messageToReturn);
+
+        }
+
+        [HttpPost("{id}/read")]
+        public async Task<IActionResult> MarkMessageAsRead(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            Message message = await _repo.GetMessage(id);
+
+            if (message.RecipientId != userId)
+                return Unauthorized();
+
+            message.IsRead = true;
+            message.DateRead = DateTime.Now;
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+
+            return BadRequest("saving error");
+
 
         }
 

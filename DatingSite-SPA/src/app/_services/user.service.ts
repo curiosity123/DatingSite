@@ -141,15 +141,23 @@ export class UserService {
       this.baseUrl + 'users/' + id + '/messages', message);
   }
 
+  markMessageAsRead(userId: number, messageId: number) {
+
+    return this.http.post(
+      this.baseUrl + 'users/' + userId + '/messages/' + messageId + '/read', {}).subscribe();
+
+  }
+
   deleteMessage(id: number, userId: number) {
     return this.http.delete(
       this.baseUrl + 'users/' + userId + '/messages/' + id, {});
   }
 
-DeletePhoto(id: number, photoId: number) {
-  return this.http.delete(
-    this.baseUrl + 'users/' + id + '/photos/' + photoId + '/deletePhoto',
-    {}
-  );
-}
+  DeletePhoto(id: number, photoId: number) {
+  
+    return this.http.delete(
+      this.baseUrl + 'users/' + id + '/photos/' + photoId + '/deletePhoto',
+      {}
+    );
+  }
 }
