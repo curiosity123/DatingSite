@@ -93,7 +93,19 @@ namespace DatingSite_API
             seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthentication();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "spa",
+                    pattern: "{controller=FallbackController}/{action=Index}");
+
+                endpoints.MapFallbackToController("Index", "Fallback");
+            });
         }
     }
 }
