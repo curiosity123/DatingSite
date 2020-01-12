@@ -46,7 +46,7 @@ import { MessagesResolver } from './_resolvers/messages.resolver';
 import { UserMessagesComponent } from './users/user-messages/user-messages.component';
 
 
-class CustomHammerConfig2 extends HammerGestureConfig {
+export class CustomHammerConfig2 extends HammerGestureConfig {
   overrides = {
     pinch: { enable: false },
     rotate: { enable: false }
